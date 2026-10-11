@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Saif's Proposal 💖</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg1:#ffe4ef;--bg2:#ffb6d3;--card:#fff;--ink:#8a1c4a;--pink:#ff4f93;--pink2:#ff85b3;--soft:#ffd1e4}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#3a0f26;--bg2:#6b1a42;--card:#4a1530;--ink:#ffd6e8;--soft:#7a2150}}
+:root[data-theme="dark"]{--bg1:#3a0f26;--bg2:#6b1a42;--card:#4a1530;--ink:#ffd6e8;--soft:#7a2150}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font-family:"Comic Sans MS","Segoe UI",system-ui,sans-serif;background:linear-gradient(160deg,var(--bg1),var(--bg2));color:var(--ink);overflow:hidden}
+.page{display:none;height:100%;align-items:center;justify-content:center;padding:16px;position:relative;z-index:2}
+.page.on{display:flex}
+.card{background:var(--card);border-radius:28px;padding:32px 24px;max-width:420px;width:100%;text-align:center;box-shadow:0 12px 40px rgba(255,79,147,.35);animation:pop .5s ease}
+@keyframes pop{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+h1{margin:8px 0 12px;font-size:2rem;line-height:1.2;color:var(--pink)}
+p{font-size:1.1rem;margin:8px 0 20px}
+.big{font-size:4rem;animation:beat 1.2s infinite}
+@keyframes beat{50%{transform:scale(1.15)}}
+.warn{background:var(--soft);border-radius:14px;padding:10px 14px;font-size:.95rem;margin-bottom:22px}
+button{font:inherit;font-size:1.15rem;border:0;border-radius:999px;padding:12px 30px;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--pink),var(--pink2));box-shadow:0 6px 16px rgba(255,79,147,.45);transition:transform .15s}
+button:hover{transform:scale(1.06)}
+.row{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap;min-height:90px}
+button.no{background:#c9a3b5;box-shadow:none}
+.heart{position:fixed;bottom:-40px;z-index:1;animation:rise linear forwards;pointer-events:none}
+@keyframes rise{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+</style>
+</head>
+<body>
+
+<section class="page on" id="welcome"><div class="card">
+  <div class="big">💌</div>
+  <h1>Welcome to Saif's Proposal!</h1>
+  <div class="warn">⚠️ Warning: enter only if you're ready for a lot of cuteness and a very important question 🥰</div>
+  <button onclick="go('ask')">Enter 💖</button>
+</div></section>
+
+<section class="page" id="ask"><div class="card">
+  <div class="big">🌹</div>
+  <h1>Will you marry me?</h1>
+  <p>From Saif, with all his heart 💕</p>
+  <div class="row"><button onclick="go('yes')">Yes 💖</button><button class="no" onclick="go('think')">No 💔</button></div>
+</div></section>
+
+<section class="page" id="think"><div class="card">
+  <div class="big">🥺</div>
+  <h1>Are you sure?</h1>
+  <p>Please think again... maybe look into your heart once more? 💭💗</p>
+  <div class="row"><button onclick="go('yes')">Okay, Yes 💖</button><button class="no" onclick="go('beg')">Still No</button></div>
+</div></section>
+
+<section class="page" id="beg"><div class="card">
+  <div class="big">😭</div>
+  <h1 id="begTitle">Pleeeease marry me! 🥹</h1>
+  <p id="begText">I'll share my fries, give you the blanket and always say you're right... 🍟💕</p>
+  <div class="row" id="begRow"><button id="yesBtn" onclick="go('yes')">Yes 💖</button><button class="no" id="noBtn" onclick="beg()">No</button></div>
+</div></section>
+
+<section class="page" id="yes"><div class="card">
+  <div class="big">😘</div>
+  <h1>YAAAY! I love you! 💖</h1>
+  <p style="font-size:2rem;line-height:1.5">💑 😍 💋<br>❤️ 😘 💞<br>🥰 💍 💗</p>
+  <p>You just made Saif the happiest person in the world! 🌸<br><b>Forever &amp; always, Saif + You 💕</b></p>
+</div></section>
+
+<script>
+var msgs=[
+ ["Pleeeease marry me! 🥹","I'll share my fries, give you the blanket and always say you're right... 🍟💕"],
+ ["I'm begging you 😭","Look at my puppy eyes... I'll bring you chocolates every day 🍫🐶"],
+ ["My heart is breaking 💔","Just one little yes? I'll even do the dishes! 🍽️🥺"],
+ ["Okay now I'm crying 😢","Pretty please with a cherry on top? 🍒💖"]
+];
+var n=0;
+function go(id){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('on')});
+  document.getElementById(id).classList.add('on');
+  if(id==='yes'){for(var i=0;i<40;i++)setTimeout(heart,i*80)}
+}
+function beg(){
+  n++;
+  var m=msgs[n%msgs.length];
+  document.getElementById('begTitle').textContent=m[0];
+  document.getElementById('begText').textContent=m[1];
+  var y=document.getElementById('yesBtn'),b=document.getElementById('noBtn');
+  y.style.transform='scale('+Math.min(1+n*0.25,2.2)+')';
+  y.style.margin='0 '+Math.min(n*8,30)+'px';
+  b.style.transform='scale('+Math.max(1-n*0.15,0.45)+')';
+}
+function heart(){
+  var h=document.createElement('div');
+  h.className='heart';
+  h.textContent=['💖','💕','💗','💋','😘','💞'][Math.floor(Math.random()*6)];
+  h.style.left=Math.random()*100+'vw';
+  h.style.fontSize=(20+Math.random()*30)+'px';
+  h.style.animationDuration=(3+Math.random()*3)+'s';
+  document.body.appendChild(h);
+  setTimeout(function(){h.remove()},6500);
+}
+setInterval(heart,900);
+</script>
+</body>
+</html>
